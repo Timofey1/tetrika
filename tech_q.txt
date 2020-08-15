@@ -1,0 +1,7 @@
+SELECT lessons.scheduled_time as day, users.id as tutors_id, avg(quality.tech_quality) as avg_q
+FROM quality join lessons on lessons.id = quality.lesson_id 
+join participants on lessons.event_id = participants.event_id
+join users on users.id = participants.user_id
+WHERE lessons.subject = 'phys' and users.role='tutor'
+GROUP BY day(lessons.scheduled_time),users.id
+ORDER BY avg_q ASC
